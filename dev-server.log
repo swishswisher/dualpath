@@ -1,0 +1,10 @@
+
+> dualpath@0.1.0 dev
+> next dev
+
+   ▲ Next.js 16.0.3 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.100.3:3000
+
+ ✓ Starting...
+ ✓ Ready in 10.7s
