@@ -1,5 +1,5 @@
 export type DemoModule = {
-  id: string;
+  id: number;
   index: number;
   title: string;
   slug: string;
@@ -9,7 +9,7 @@ export type DemoModule = {
 
 export const demoModules: DemoModule[] = [
   {
-    id: "module-1",
+    id: 1,
     index: 1,
     title: "Discipline & Ownership",
     slug: "discipline-ownership",
@@ -17,28 +17,48 @@ export const demoModules: DemoModule[] = [
     focusAreas: ["habits", "reflection", "responsibility"],
   },
   {
-    id: "module-2-5",
+    id: 2,
     index: 2,
-    title:
-      "Internship Skills (Cold Email, Resume, Networking, Interviews, Negotiation)",
-    slug: "internship-skills",
+    title: "Cold Email Fundamentals",
+    slug: "cold-email-fundamentals",
     summary:
-      "Learn how to reach out, pitch yourself, and perform strongly in interviews.",
-    focusAreas: [
-      "cold emails",
-      "resume",
-      "networking",
-      "interviews",
-      "negotiation",
-    ],
+      "Craft outreach messages that get replies and open doors with professionals.",
+    focusAreas: ["copywriting", "email sequencing", "follow-ups"],
   },
   {
-    id: "module-6",
-    index: 6,
-    title: "AI-Personalized Module",
-    slug: "ai-personalized",
+    id: 3,
+    index: 3,
+    title: "Resume & Portfolio Proof",
+    slug: "resume-portfolio-proof",
     summary:
-      "Dynamic, AI-generated training tailored to your weak spots.",
+      "Translate projects into proof. Build resumes, case studies, and personal sites that convert.",
+    focusAreas: ["resume", "portfolio", "case studies"],
+  },
+  {
+    id: 4,
+    index: 4,
+    title: "Networking & Relationship Building",
+    slug: "networking-relationship-building",
+    summary:
+      "Use events, LinkedIn, and warm introductions to create a steady pipeline of opportunities.",
+    focusAreas: ["networking", "linkedin", "events", "mentors"],
+  },
+  {
+    id: 5,
+    index: 5,
+    title: "Interviewing & Negotiation",
+    slug: "interviewing-negotiation",
+    summary:
+      "Prep for behavioral + technical interviews and learn how to negotiate offers with confidence.",
+    focusAreas: ["behavioral", "technical interviews", "negotiation"],
+  },
+  {
+    id: 6,
+    index: 6,
+    title: "AI-Personalized Practice",
+    slug: "ai-personalized-module",
+    summary:
+      "Dynamic, AI-generated training tailored to your weak spots with instant feedback.",
     focusAreas: ["adaptive learning", "personalized practice"],
   },
 ];

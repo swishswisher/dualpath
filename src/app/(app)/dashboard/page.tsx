@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import {
   Card,
   CardContent,
@@ -6,12 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { demoModules } from "@/data/modules";
-
-const moduleTag = (index: number) => {
-  if (index === 1) return "Core";
-  if (index >= 2 && index <= 5) return "Skills";
-  return "AI";
-};
 
 export default function StudentDashboardPage() {
   return (
@@ -35,33 +31,36 @@ export default function StudentDashboardPage() {
                 Discipline, outreach skills, then adaptive AI practice
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              {demoModules.map((module) => (
-                <div
-                  key={module.id}
-                  className="flex flex-col gap-3 rounded-xl border border-[#0f172a]/25 p-4 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                      {module.index === 6
-                        ? "AI Personalized Module"
-                        : `Module ${module.index}`}
-                    </p>
-                    <p className="text-sm font-medium text-foreground">
-                      {module.title}
-                    </p>
-                  </div>
-                  <span
-                    className={
-                      moduleTag(module.index) === "AI"
-                        ? "rounded-full bg-[#0f172a]/80 px-2 py-0.5 text-[11px] text-white"
-                        : "rounded-full bg-white/60 px-2 py-0.5 text-[11px] text-[#0f172a]/80"
-                    }
+            <CardContent className="space-y-3">
+              <div className="space-y-2">
+                {demoModules.map((module) => (
+                  <Link
+                    key={module.id}
+                    href={`/modules/${module.slug}`}
+                    className="flex items-center justify-between rounded-lg border border-[#0f172a]/15 bg-[#0f172a]/5 px-3 py-2 text-sm text-foreground transition-colors hover:bg-[#0f172a]/10"
                   >
-                    {moduleTag(module.index)}
-                  </span>
-                </div>
-              ))}
+                    <div className="flex flex-col">
+                      <span className="font-medium">{module.title}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {module.id === 6
+                          ? "AI-personalized module"
+                          : `Module ${module.id}`}
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-medium text-[#0f172a]/80">
+                      {module.id === 6 ? "AI" : "Core"}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+              <div className="pt-2">
+                <Link
+                  href="/modules"
+                  className="text-xs font-medium text-[#0f172a] hover:underline"
+                >
+                  View all modules
+                </Link>
+              </div>
             </CardContent>
           </Card>
 

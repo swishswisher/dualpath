@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Student Portal", href: "/dashboard" },
+  { label: "Modules", href: "/modules" },
   { label: "Admin", href: "/admin" },
 ];
 
@@ -72,8 +73,8 @@ export function SiteHeader() {
       </header>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-black/40 md:hidden">
-          <div className="flex h-full w-[90%] max-w-xs flex-col bg-[#0f172a]/95 text-white">
+        <div className="fixed inset-0 z-50 flex flex-col bg-black/40 md:hidden">
+          <div className="ml-auto flex h-full w-[90%] max-w-xs flex-col bg-[#0f172a]/95 text-white">
             <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
               <span className="text-base font-semibold">Menu</span>
               <button
@@ -86,32 +87,34 @@ export function SiteHeader() {
               </button>
             </div>
 
-            <nav className="flex flex-1 flex-col items-start justify-center gap-6 px-6 text-lg font-medium">
-              {navLinks.map((item) => (
-                <Link
-                  key={item.href + "-mobile"}
-                  href={item.href}
-                  className={
-                    "transition-colors " +
-                    (isActive(item.href)
-                      ? "text-white"
-                      : "text-white/80 hover:text-white")
-                  }
-                  onClick={() => setIsOpen(false)}
+            <div className="flex flex-1 items-center">
+              <nav className="flex w-full flex-col gap-6 px-6 text-left text-lg font-medium">
+                {navLinks.map((item) => (
+                  <Link
+                    key={item.href + "-mobile"}
+                    href={item.href}
+                    className={
+                      "transition-colors " +
+                      (isActive(item.href)
+                        ? "text-white"
+                        : "text-white/80 hover:text-white")
+                    }
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <Button
+                  asChild
+                  size="lg"
+                  className="mt-8 bg-white text-[#0f172a] hover:bg-slate-100"
                 >
-                  {item.label}
-                </Link>
-              ))}
-              <Button
-                asChild
-                size="lg"
-                className="mt-8 bg-white text-[#0f172a] hover:bg-slate-100"
-              >
-                <Link href="/dashboard" onClick={() => setIsOpen(false)}>
-                  Get started
-                </Link>
-              </Button>
-            </nav>
+                  <Link href="/dashboard" onClick={() => setIsOpen(false)}>
+                    Get started
+                  </Link>
+                </Button>
+              </nav>
+            </div>
           </div>
         </div>
       )}

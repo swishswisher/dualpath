@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import {
   Card,
   CardContent,
@@ -5,94 +7,120 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { demoGroups, demoStudents } from "@/data/admin-demo";
 
 export default function AdminDashboardPage() {
   return (
     <div className="bg-background">
-      <section className="mx-auto w-full max-w-6xl space-y-6 px-4 py-8">
+      <section className="mx-auto w-full max-w-6xl space-y-6 px-4 py-8 md:py-10">
         <div className="space-y-2">
           <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
-            Admin Dashboard
+            Admin overview
           </h1>
-          <p className="max-w-xl text-sm text-muted-foreground">
-            Monitor student progress, AI usage, and content performance.
+          <p className="max-w-2xl text-sm text-muted-foreground">
+            This is the owner view for DualPath. Later, these numbers will come
+            from the database, showing how many students and groups are active
+            across the platform.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <Card className="h-full w-full border border-[#0f172a]/15 bg-[#0f172a]/3 shadow-sm backdrop-blur-sm">
+        <div className="grid gap-4 md:grid-cols-3">
+          <Card className="h-full w-full rounded-xl border border-[#0f172a]/15 bg-[#0f172a]/5 shadow-sm backdrop-blur-sm">
             <CardHeader>
-              <CardTitle>Student Overview</CardTitle>
+              <CardTitle>Total students</CardTitle>
               <CardDescription>
-                Snapshot of cohort engagement and completion.
+                All enrolled students across groups.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <p>
-                <span className="font-semibold text-foreground">Active students:</span>{" "}
-                <span className="text-sm text-muted-foreground">42</span>
+            <CardContent>
+              <p className="text-2xl font-semibold text-foreground">
+                {demoStudents.length}
               </p>
-              <p>
-                <span className="font-semibold text-foreground">Avg module completion:</span>{" "}
-                <span className="text-sm text-muted-foreground">68%</span>
-              </p>
-              <p>
-                <span className="font-semibold text-foreground">Needs follow-up:</span>{" "}
-                <span className="text-sm text-amber-600 font-semibold">7</span>
-              </p>
-              {/* TODO: Connect to real DB analytics. */}
             </CardContent>
           </Card>
 
-          <Card className="h-full w-full border border-[#0f172a]/15 bg-[#0f172a]/3 shadow-sm backdrop-blur-sm">
+          <Card className="h-full w-full rounded-xl border border-[#0f172a]/15 bg-[#0f172a]/5 shadow-sm backdrop-blur-sm">
             <CardHeader>
-              <CardTitle>AI Stats</CardTitle>
-              <CardDescription>
-                See how the personalized module is being used.
-              </CardDescription>
+              <CardTitle>Student groups</CardTitle>
+              <CardDescription>Configured cohorts or classes.</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <p>
-                <span className="font-semibold text-foreground">
-                  Module 6 generations:
-                </span>{" "}
-                <span className="text-sm text-muted-foreground">89</span>
+            <CardContent>
+              <p className="text-2xl font-semibold text-foreground">
+                {demoGroups.length}
               </p>
-              <p>
-                <span className="font-semibold text-foreground">
-                  Avg score lift after Module 6:
-                </span>{" "}
-                <span className="text-emerald-600 font-semibold">+12%</span>
-              </p>
-              <p>
-                <span className="font-semibold text-foreground">
-                  Avg reflections completed:
-                </span>{" "}
-                <span className="text-sm text-muted-foreground">3.2 per student</span>
-              </p>
-              {/* TODO: Connect to AI usage events. */}
             </CardContent>
           </Card>
 
-          <Card className="h-full w-full border border-[#0f172a]/15 bg-[#0f172a]/3 shadow-sm backdrop-blur-sm">
+          <Card className="h-full w-full rounded-xl border border-[#0f172a]/15 bg-[#0f172a]/5 shadow-sm backdrop-blur-sm">
             <CardHeader>
-              <CardTitle>Content Management</CardTitle>
+              <CardTitle>Avg module completion</CardTitle>
               <CardDescription>
-                Keep modules and lessons up to date.
+                Rough average across all students.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-2">
-              <p className="text-sm text-muted-foreground">
-                Batch updates to modules, lessons, and practice tasks without
-                leaving this dashboard. Review feedback and push changes with
-                confidence.
+            <CardContent>
+              <p className="text-2xl font-semibold text-foreground">
+                {Math.round(
+                  demoStudents.reduce(
+                    (sum, s) => sum + s.completionPercent,
+                    0
+                  ) / Math.max(demoStudents.length, 1)
+                )}
+                %
               </p>
-              <p className="text-xs text-muted-foreground">
-                Content tools will live here in a future phase.
-              </p>
-              {/* TODO: Link to admin content tooling once available. */}
             </CardContent>
           </Card>
+        </div>
+
+        <div className="space-y-3">
+          <div className="flex items-center justify-between gap-2">
+            <h2 className="text-lg font-semibold tracking-tight text-foreground">
+              Student groups
+            </h2>
+            <p className="text-xs text-muted-foreground">
+              Later, owners will be able to create groups and assign group
+              admins here.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {demoGroups.map((group) => (
+              <Card
+                key={group.id}
+                className="flex h-full w-full flex-col rounded-xl border border-[#0f172a]/15 bg-[#0f172a]/5 shadow-sm backdrop-blur-sm"
+              >
+                <CardHeader className="space-y-1">
+                  <CardTitle className="text-base font-semibold">
+                    {group.name}
+                  </CardTitle>
+                  <CardDescription className="text-xs">
+                    Group admin: {group.adminName}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3 text-sm text-muted-foreground">
+                  <div className="flex items-center justify-between text-xs">
+                    <span>Students</span>
+                    <span className="font-semibold text-foreground">
+                      {group.studentCount}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span>Avg completion</span>
+                    <span className="font-semibold text-foreground">
+                      {group.activeModulesAverage}%
+                    </span>
+                  </div>
+                  <div className="pt-2">
+                    <Link
+                      href={`/admin/groups/${group.id}`}
+                      className="text-xs font-medium text-[#0f172a] hover:underline"
+                    >
+                      View group details
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
     </div>
