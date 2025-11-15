@@ -25,7 +25,7 @@ export function SiteHeader() {
   return (
     <>
       {/* Main header bar */}
-      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-[#0f172a]/90 backdrop-blur">
+      <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-[#0f172a]/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:py-4">
           {/* Brand */}
           <Link
