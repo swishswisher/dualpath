@@ -27,17 +27,11 @@ export default function ModulesPage() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {demoModules.map((module) => (
-            <Card
-              key={module.id}
-              asChild
-              className="flex h-full w-full flex-col rounded-xl border border-[#0f172a]/15 bg-[#0f172a]/5 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md"
-            >
-              <Link href={`/modules/${module.slug}`}>
+            <Link key={module.id} href={`/modules/${module.slug}`} className="block">
+              <Card className="flex h-full w-full flex-col rounded-xl border border-[#0f172a]/15 bg-[#0f172a]/5 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md">
                 <CardHeader>
                   <p className="text-[11px] font-semibold uppercase tracking-wide text-primary">
-                    {module.id === 6
-                      ? "AI Module"
-                      : `Module ${module.id}`}
+                    {module.id === 6 ? "AI Module" : `Module ${module.id}`}
                   </p>
                   <CardTitle>{module.title}</CardTitle>
                   <CardDescription>{module.summary}</CardDescription>
@@ -58,8 +52,8 @@ export default function ModulesPage() {
                     <ArrowRight className="h-3.5 w-3.5" />
                   </div>
                 </CardContent>
-              </Link>
-            </Card>
+              </Card>
+            </Link>
           ))}
         </div>
       </section>
