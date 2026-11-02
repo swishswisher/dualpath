@@ -1,0 +1,6 @@
+@model DualPath.Web.Pages.IndexModel
+<div class="content-wrap"><section class="card">@if(Model.Section=="accept"){
+<h2 style="font-size:30px">A shared path starts with an invitation.</h2><p>Accept only if you recognise the institution. Your verified account email must match the invitation recipient.</p><form method="post"><input type="hidden" name="Command" value="accept"><input type="hidden" name="Input.Code" value="@Context.Request.Query["token"]"><button class="btn">Accept invitation →</button></form>
+}else{
+<h2 style="font-size:30px">Start with where you are.</h2><p>A concrete goal helps you choose a useful next step.</p><form method="post"><input type="hidden" name="Command" value="onboard"><div class="field"><label asp-for="Input.Education">Your current stage</label><select asp-for="Input.Education"><option>High school student</option><option>College or university student</option><option>Recent graduate</option></select></div><div class="field"><label asp-for="Input.Body">What would you like to work toward?</label><textarea asp-for="Input.Body" maxlength="2000" minlength="5" required placeholder="Example: research three teams and write one thoughtful question for each."></textarea></div><button class="btn">Save your starting goal →</button></form>
+}</section></div>

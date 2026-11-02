@@ -1,0 +1,11 @@
+.git
+.local-tools
+.preview-local.json
+legacy
+artifacts
+**/bin
+**/obj
+**/App_Data
+.env*
+tests
+node_modules

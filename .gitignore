@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# .NET and local runtime data
+**/bin/
+**/obj/
+**/App_Data/
+TestResults/
+artifacts/
+*.user
+*.suo
+.preview-local.json
+
+.local-tools/

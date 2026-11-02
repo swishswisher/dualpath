@@ -1,0 +1,4 @@
+@model DualPath.Web.Pages.IndexModel
+<div class="wrap content-width"><div class="page-intro"><div class="eyebrow">A helpful place to start</div><h1>@(Model.Article?.Title??"Good guidance. A useful next step.")</h1><p class="lead">Practical learning for the questions that come before the first opportunity.</p></div>
+@if(Model.Article!=null){<article class="card"><div class="prose">@Model.Article.PublishedBody</div><div class="divider"></div><a class="btn" href="/learning">Put it into practice →</a></article>}else{<div class="grid2">@foreach(var item in Model.PublicContent){<article class="card"><div class="card-visual">↗</div><h3>@item.Title</h3><p>@(item.PublishedBody.Length>150?item.PublishedBody[..150]+"…":item.PublishedBody)</p><a class="text-link" href="/article/@item.Slug">Read the guide →</a></article>}</div>}
+</div>
