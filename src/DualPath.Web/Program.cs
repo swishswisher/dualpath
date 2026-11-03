@@ -1,3 +1,4 @@
+using System.Net;
 using System.Threading.RateLimiting;
 using DualPath.Web.Data;
 using DualPath.Web.Domain;
@@ -5,6 +6,7 @@ using DualPath.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,12 +29,24 @@ builder.Services.AddRazorPages(o=>o.Conventions.ConfigureFilter(new Microsoft.As
 builder.Services.AddScoped<Access>();builder.Services.AddScoped<LearningService>();builder.Services.AddScoped<InstitutionService>();builder.Services.AddScoped<PrivateStorage>();builder.Services.AddScoped<AccountService>();builder.Services.AddScoped<PracticeService>();
 builder.Services.AddHttpClient<PracticeProvider>(c=>c.Timeout=TimeSpan.FromSeconds(45));builder.Services.AddHttpClient<EmailProvider>(c=>c.Timeout=TimeSpan.FromSeconds(20));builder.Services.AddHttpClient<BillingService>(c=>c.Timeout=TimeSpan.FromSeconds(30));
 builder.Services.AddHostedService<OutboxWorker>();
+var trustedProxies=builder.Configuration.GetSection("DualPath:TrustedProxies").Get<string[]>()??[];
+if(trustedProxies.Length>0)
+{
+    builder.Services.Configure<ForwardedHeadersOptions>(options=>
+    {
+        options.ForwardedHeaders=ForwardedHeaders.XForwardedFor|ForwardedHeaders.XForwardedProto;
+        options.KnownIPNetworks.Clear();
+        options.KnownProxies.Clear();
+        foreach(var proxy in trustedProxies)
+            options.KnownProxies.Add(IPAddress.Parse(proxy));
+    });
+}
 builder.Services.AddRateLimiter(o=>
 {
     o.RejectionStatusCode=429;
     o.GlobalLimiter=PartitionedRateLimiter.Create<HttpContext,string>(c=>
     {
-        var sensitive=HttpMethods.IsPost(c.Request.Method)&&new[]{"/signin","/signup","/reset","/reset-password","/contact"}.Contains(c.Request.Path.Value);
+        var sensitive=HttpMethods.IsPost(c.Request.Method)&&new[]{"signin","signup","reset","reset-password","contact"}.Contains(c.GetRouteValue("section") as string,StringComparer.OrdinalIgnoreCase);
         var key=(sensitive?"forms:":"requests:")+(c.User.Identity?.Name??c.Connection.RemoteIpAddress?.ToString()??"unknown");
         return RateLimitPartition.GetFixedWindowLimiter(key,_=>new FixedWindowRateLimiterOptions{PermitLimit=sensitive?builder.Configuration.GetValue("RateLimits:FormRequestsPerMinute",12):builder.Configuration.GetValue("RateLimits:RequestsPerMinute",120),Window=TimeSpan.FromMinutes(1),QueueLimit=0});
     });
@@ -43,6 +57,7 @@ if(app.Environment.IsProduction())
     if(app.Configuration.GetValue<bool>("DualPath:SeedDemo"))throw new InvalidOperationException("Demo seeding is prohibited in Production.");
     if(!Uri.TryCreate(app.Configuration["DualPath:BaseUrl"],UriKind.Absolute,out var baseUri)||baseUri.Scheme!="https")throw new InvalidOperationException("Production requires a configured HTTPS DualPath:BaseUrl.");
 }
+if(trustedProxies.Length>0)app.UseForwardedHeaders();
 app.UseExceptionHandler("/error");if(!app.Environment.IsDevelopment()&&!app.Environment.IsEnvironment("Testing")){app.UseHsts();app.UseHttpsRedirection();}
 app.Use(async(context,next)=>
 {

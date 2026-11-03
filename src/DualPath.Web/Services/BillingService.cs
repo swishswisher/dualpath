@@ -14,7 +14,8 @@ public sealed class BillingService(AppDb db,Access access,LearningService learni
     private void RequireProvider()
     {
         if(!Ready)throw new DomainException("Secure billing is not configured yet. No payment has been taken.",503);
-        if(config["Billing:SecretKey"]!.StartsWith("sk_live_",StringComparison.Ordinal)&&!config.GetValue<bool>("Billing:AllowLive"))throw new DomainException("Live billing is not enabled by the operator.",503);
+        var key=config["Billing:SecretKey"]!;
+        if((key.StartsWith("sk_live_",StringComparison.Ordinal)||key.StartsWith("rk_live_",StringComparison.Ordinal))&&!config.GetValue<bool>("Billing:AllowLive"))throw new DomainException("Live billing is not enabled by the operator.",503);
     }
     private async Task<JsonDocument> Api(string path,Dictionary<string,string> fields,string? idempotency=null,CancellationToken ct=default)
     {
@@ -49,7 +50,8 @@ public sealed class BillingService(AppDb db,Access access,LearningService learni
     {
         if(string.IsNullOrWhiteSpace(secret))throw new DomainException("Webhook is not configured.",503);
         var parts=header.Split(',').Select(x=>x.Split('=',2)).Where(x=>x.Length==2).ToList();var stamp=parts.FirstOrDefault(x=>x[0]=="t")?.ElementAtOrDefault(1);
-        if(!long.TryParse(stamp,out var timestamp)||Math.Abs(now.ToUnixTimeSeconds()-timestamp)>300)throw new DomainException("Invalid webhook signature.",400);
+        var current=now.ToUnixTimeSeconds();
+        if(!long.TryParse(stamp,out var timestamp)||timestamp<current-300||timestamp>current+300)throw new DomainException("Invalid webhook signature.",400);
         var expected=HMACSHA256.HashData(Encoding.UTF8.GetBytes(secret),Encoding.UTF8.GetBytes(stamp+"."+payload));
         var valid=false;foreach(var p in parts.Where(x=>x[0]=="v1")){try{if(CryptographicOperations.FixedTimeEquals(expected,Convert.FromHexString(p[1])))valid=true;}catch(FormatException){}}
         if(!valid)throw new DomainException("Invalid webhook signature.",400);

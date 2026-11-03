@@ -21,6 +21,22 @@ public sealed class HttpTests(PlatformFixture fixture)
     {using var client=fixture.Client();var r=await client.GetAsync(path);Assert.Equal(HttpStatusCode.Redirect,r.StatusCode);Assert.Contains("/signin",r.Headers.Location?.ToString());}
     [Fact]public async Task PostWithoutAntiforgeryTokenIsRejected()
     {using var client=fixture.Client();var r=await client.PostAsync("/signin",new FormUrlEncodedContent(new Dictionary<string,string>{{"Command","login"},{"Input.Email","student@demo.dualpath.test"},{"Input.Password",PlatformFixture.Password}}));Assert.Equal(HttpStatusCode.BadRequest,r.StatusCode);}
+    [Fact]
+    public async Task FormFieldCannotOverrideTheAuthenticationRoute()
+    {
+        using var client=fixture.Client();
+        var token=await PlatformFixture.Token(client,"/signin");
+        var fields=new Dictionary<string,string>
+        {
+            ["Command"]="login",
+            ["Section"]="signin",
+            ["Input.Email"]="student@demo.dualpath.test",
+            ["Input.Password"]=PlatformFixture.Password,
+            ["__RequestVerificationToken"]=token
+        };
+        var response=await client.PostAsync("/",new FormUrlEncodedContent(fields));
+        Assert.Equal(HttpStatusCode.BadRequest,response.StatusCode);
+    }
     [Fact]public async Task StudentCannotAccessPlatformAdministration()
     {using var client=await fixture.Login();var r=await client.GetAsync("/admin");Assert.Equal(HttpStatusCode.Forbidden,r.StatusCode);Assert.DoesNotContain("Platform operations</h1>",await r.Content.ReadAsStringAsync());}
     [Fact]public async Task SavedReflectionSurvivesLogoutAndNewSession()

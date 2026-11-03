@@ -23,7 +23,7 @@ Use a .NET 10 compatible container host, VM or ASP.NET service. Native Sites pre
 
 ## HTTPS and reverse proxies
 
-The application uses HSTS, HTTPS redirection and Secure session cookies in Production. Configure an explicit trusted proxy with the ASP.NET Core forwarding settings described by your host. Do not trust arbitrary forwarded headers from Internet clients. The default forwarded-header behaviour is deliberately not widened by this repository. If the host terminates TLS, verify the app recognises HTTPS and correct client addresses before launch; otherwise redirects and rate limits can behave incorrectly.
+The application uses HSTS, HTTPS redirection and Secure session cookies in Production. For a single reverse-proxy hop, set `DualPath__TrustedProxies__0` to the proxy IP as seen by the app. Add indexed entries for additional equivalent proxy instances. DualPath accepts `X-Forwarded-For` and `X-Forwarded-Proto` from those peers, with a one-hop forwarding limit. Configure the proxy to set those headers from the incoming connection and restrict direct access to the app port. If the host terminates TLS, verify the app recognises HTTPS and correct client addresses before launch; otherwise redirects and rate limits can behave incorrectly.
 
 ## Rollback
 

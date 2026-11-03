@@ -22,7 +22,7 @@ public sealed class FormInput
 }
 public sealed class IndexModel(AppDb db,UserManager<AppUser> users,SignInManager<AppUser> signIn,Access access,LearningService learning,InstitutionService institutions,AccountService accounts,PrivateStorage storage,PracticeService practice,BillingService billing,IConfiguration config,IWebHostEnvironment env):PageModel
 {
-    [BindProperty(SupportsGet=true)]public string Section {get;set;}="home";
+    [BindProperty(SupportsGet=true),FromRoute]public string Section {get;set;}="home";
     [BindProperty(SupportsGet=true)]public string? Item {get;set;}
     [BindProperty(SupportsGet=true)]public string Search {get;set;}="";
     [BindProperty(SupportsGet=true)]public int PageNumber {get;set;}=1;

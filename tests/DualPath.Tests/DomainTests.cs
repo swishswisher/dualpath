@@ -61,6 +61,32 @@ public sealed class DomainTests(PlatformFixture fixture)
     {
         await using var scope=fixture.Scope();var sp=scope.ServiceProvider;var db=sp.GetRequiredService<AppDb>();var student=await fixture.NewUser(sp);var assignment=await db.Assignments.Include(a=>a.Course).FirstAsync(a=>a.Course.Position==1);var work=await sp.GetRequiredService<LearningService>().SaveSubmission(student,assignment.Id,"Private draft","A private test draft with a useful concrete example.",null,false);var storage=sp.GetRequiredService<PrivateStorage>();await using var invalid=new MemoryStream(Encoding.UTF8.GetBytes("Not a PDF file"));var fake=new FormFile(invalid,0,invalid.Length,"file","notes.pdf");await Assert.ThrowsAsync<DomainException>(()=>storage.Upload(student,work.Id,fake));await using var valid=new MemoryStream(Encoding.UTF8.GetBytes("%PDF-1.4\nminimal test fixture"));var file=await storage.Upload(student,work.Id,new FormFile(valid,0,valid.Length,"file","notes.pdf"));var other=await fixture.NewUser(sp);Assert.Equal(404,(await Assert.ThrowsAsync<DomainException>(()=>storage.Download(other,file.Id))).Status);Assert.Equal(file.Id,(await storage.Download(student,file.Id)).File.Id);
     }
+    [Fact]
+    public async Task AssignedInstructorCanReadAttachmentOnlyAfterSubmission()
+    {
+        await using var scope=fixture.Scope();
+        var sp=scope.ServiceProvider;
+        var db=sp.GetRequiredService<AppDb>();
+        var student=await fixture.NewUser(sp);
+        var teacher=await fixture.User(sp,"instructor@demo.dualpath.test");
+        var cohort=await db.Cohorts.SingleAsync(c=>c.InstructorUserId==teacher.Id);
+        var assignment=await db.Assignments.SingleAsync(a=>a.CourseId==cohort.CourseId);
+        db.Memberships.Add(new Membership{OrganisationId=cohort.OrganisationId,UserId=student.Id,Role=Roles.Student});
+        db.Enrolments.Add(new Enrolment{CohortId=cohort.Id,UserId=student.Id});
+        db.Subscriptions.Add(new Subscription{UserId=student.Id,Status="Active",PaidThrough=DateTimeOffset.UtcNow.AddDays(1)});
+        await db.SaveChangesAsync();
+
+        const string body="A specific contribution to the team’s internship project.";
+        var learning=sp.GetRequiredService<LearningService>();
+        var work=await learning.SaveSubmission(student,assignment.Id,"Private draft",body,cohort.Id,false);
+        var storage=sp.GetRequiredService<PrivateStorage>();
+        await using var bytes=new MemoryStream("%PDF-1.4 test fixture"u8.ToArray());
+        var file=await storage.Upload(student,work.Id,new FormFile(bytes,0,bytes.Length,"file","draft.pdf"));
+        Assert.Equal(404,(await Assert.ThrowsAsync<DomainException>(()=>storage.Download(teacher,file.Id))).Status);
+
+        await learning.SaveSubmission(student,assignment.Id,"Submitted work",body,cohort.Id,true,work.Version);
+        Assert.Equal(file.Id,(await storage.Download(teacher,file.Id)).File.Id);
+    }
     [Fact]public async Task DraftLessonChangesDoNotChangePublishedLearning()
     {
         await using var scope=fixture.Scope();var sp=scope.ServiceProvider;var admin=await fixture.User(sp,"admin@demo.dualpath.test");var db=sp.GetRequiredService<AppDb>();var l=await db.Lessons.FirstAsync();var original=l.Body;var version=l.ContentVersion;var service=sp.GetRequiredService<LearningService>();await service.SaveLesson(admin,l.Id,l.Title,l.Objective,"A new draft body that remains private until it is explicitly published.",l.Question,["A","B","C"],1,false,l.Version);await db.Entry(l).ReloadAsync();Assert.Equal(original,l.Body);Assert.NotEmpty(l.DraftJson);await service.SaveLesson(admin,l.Id,l.Title,l.Objective,"A published body with an explicit new content version for future learners.",l.Question,["A","B","C"],1,true,l.Version);Assert.Equal(version+1,l.ContentVersion);Assert.True(await db.LessonSnapshots.AnyAsync(s=>s.LessonId==l.Id&&s.ContentVersion==version));
@@ -68,6 +94,7 @@ public sealed class DomainTests(PlatformFixture fixture)
     [Fact]public void WebhookSignaturesRejectTamperingAndStaleTimestamps()
     {
         var now=DateTimeOffset.UtcNow;var stamp=now.ToUnixTimeSeconds();var payload="{\"id\":\"test\"}";var secret="test-signing-secret";var sig=Convert.ToHexString(HMACSHA256.HashData(Encoding.UTF8.GetBytes(secret),Encoding.UTF8.GetBytes(stamp+"."+payload)));BillingService.VerifySignature(payload,$"t={stamp},v1={sig}",secret,now);Assert.Throws<DomainException>(()=>BillingService.VerifySignature(payload+" ",$"t={stamp},v1={sig}",secret,now));Assert.Throws<DomainException>(()=>BillingService.VerifySignature(payload,$"t={stamp},v1={sig}",secret,now.AddMinutes(10)));
+        Assert.Throws<DomainException>(()=>BillingService.VerifySignature(payload,$"t={long.MinValue},v1={sig}",secret,now));
     }
     [Fact]public async Task BillingEventsAreIdempotentAndOldEventsCannotRestoreCancelledAccess()
     {

@@ -8,6 +8,7 @@ ASP.NET Core configuration uses double underscores for environment nesting. Keep
 | `ASPNETCORE_ENVIRONMENT` | `Development`, `Testing`, or `Production` |
 | `DualPath__BaseUrl` | Canonical origin used in verification, invitation and provider return links; HTTPS required in Production |
 | `AllowedHosts` | Semicolon-separated hostnames for the actual deployment |
+| `DualPath__TrustedProxies__0` | IP address of a trusted reverse proxy. Use indexed entries for additional peers. Leave unset for direct connections. |
 | `DualPath__ApplyMigrations` | Apply EF migrations on startup; development convenience; use an isolated release migration step for production |
 | `DualPath__SeedDemo` | Development accounts and institution; prohibited in Production |
 | `DualPath__DemoPassword` | Development-only password meeting Identity policy |
@@ -17,7 +18,7 @@ ASP.NET Core configuration uses double underscores for environment nesting. Keep
 | `Email__ApiKey` / `Email__From` | Resend API key and verified sender |
 | `Billing__SecretKey` / `Billing__WebhookSecret` | Stripe API credential and snapshot-event signing secret |
 | `Billing__IndependentPriceId` / `Billing__GuidedPriceId` / `Billing__InstitutionPriceId` | Recurring Stripe Price identifiers |
-| `Billing__AllowLive` | Must explicitly be true to use an `sk_live_` API credential |
+| `Billing__AllowLive` | Must explicitly be true to use an `sk_live_` or `rk_live_` API credential |
 | `Practice__ApiKey` / `Practice__Model` | OpenAI Responses credential and supported model identifier chosen by the operator |
 | `Practice__DailyLimit` | Per-user daily reservations; default 5; failed calls do not consume the quota |
 | `Practice__MaximumOutputTokens` | Response cap; default 700 |
