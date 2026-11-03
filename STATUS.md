@@ -35,6 +35,13 @@
 - If AI practice is enabled, supply `Practice__ApiKey` and `Practice__Model`. Verify consent, withdrawal, quota and failure handling against the chosen provider. Live email, Stripe and AI traffic were outside the local validation. Complete operator contact and retention, privacy, refund and institution policies before public launch.
 - Hosted staging acceptance should repeat the browser, provider and backup restore checks using staging storage and the staging hostname.
 
+## Public Vercel launch
+
+- Created the separate Vercel project `dualpathlearning` with the Container preset. The project domain API confirms `dualpathlearning.vercel.app` is assigned and verified. The endpoint currently returns `DEPLOYMENT_NOT_FOUND` because the project has no deployment. The existing `dualpath` project was not changed.
+- To keep the current application architecture, deploy DualPath to an authorized always-on HTTPS origin, then route the public Vercel hostname to that origin with an external rewrite. Set `DualPath__BaseUrl=https://dualpathlearning.vercel.app` so generated links use the public hostname. Keep account and private-file responses uncached. [Vercel rewrite documentation](https://vercel.com/docs/routing/rewrites).
+- Access still needed: the origin and its persistent storage, a dedicated PostgreSQL production database and Resend configuration in the host secret manager. Vercel denied access to list the previous project's environment variables, so it could not establish whether any approved production provider configuration exists there. Production sign-up requires verified email delivery. Stripe and AI can stay disabled while verifying the free registration and learning path.
+- Before public launch, exercise the Vercel hostname from a clean browser without a Vercel login. Verify email confirmation and recovery, the free foundations module, signed-in session persistence and a private upload/download through the rewrite.
+
 ## Publish local commits
 
 From this checkout, fetch and review the branch before manually publishing to the existing draft PR.
