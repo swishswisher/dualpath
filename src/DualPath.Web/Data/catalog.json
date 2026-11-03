@@ -1,0 +1,322 @@
+[
+  {
+    "slug": "discipline-ownership",
+    "title": "Discipline & ownership",
+    "summary": "Build habits, take responsibility, and reflect on your actions.",
+    "position": 1,
+    "lessons": [
+      {
+        "slug": "discipline-ownership-1",
+        "title": "Choose one useful goal",
+        "objective": "Define a goal you can act on this week.",
+        "body": "A goal becomes useful when it describes an action within your control. “Get an internship” matters, but it depends on other people. “Research three teams and write one specific question for each” gives you something you can actually begin.\n\nChoose a goal that supports your direction. Write down the next action, when you will try it, and what evidence will show that you followed through. Review the plan at the end of the week without treating setbacks as a verdict on your ability.",
+        "question": "Which goal is most actionable?",
+        "options": [
+          "Become successful immediately",
+          "Research two teams and draft one question for each",
+          "Wait until an opportunity appears"
+        ],
+        "answer": 1,
+        "position": 1
+      },
+      {
+        "slug": "discipline-ownership-2",
+        "title": "Make a realistic weekly plan",
+        "objective": "Turn a goal into a small, repeatable session.",
+        "body": "Start with the time you really have. A short session you complete is more useful than a full-day schedule you cannot keep. Choose a place, reduce one distraction, and identify the very first action before the session begins.\n\nAt the end, leave a note about what comes next. If the plan repeatedly fails, make the step smaller or change the time. Planning is an experiment you can improve.",
+        "question": "What is the most useful response to an unrealistic plan?",
+        "options": [
+          "Add more tasks",
+          "Reduce the next step and adjust the schedule",
+          "Give up on the goal"
+        ],
+        "answer": 1,
+        "position": 2
+      },
+      {
+        "slug": "discipline-ownership-3",
+        "title": "Take ownership of the next step",
+        "objective": "Separate what you control from what you can influence.",
+        "body": "Ownership means noticing what you can do next, even when an outcome is uncertain. You can control the care you put into a draft and the respect in a follow-up. You cannot control whether someone has the time or budget to offer an opportunity.\n\nWhen something goes wrong, describe the facts, identify your contribution, and choose a practical repair. Avoid claiming responsibility for everything or blaming yourself for choices that were never yours.",
+        "question": "Which statement shows useful ownership?",
+        "options": [
+          "I control whether an employer hires me",
+          "I can improve the specificity of my next email",
+          "A missed reply means I should stop trying"
+        ],
+        "answer": 1,
+        "position": 3
+      },
+      {
+        "slug": "discipline-ownership-4",
+        "title": "Reflect and adjust",
+        "objective": "Use evidence from your own week to improve your plan.",
+        "body": "A reflection can be short: what did I try, what happened, and what will I change? Use a concrete moment rather than a general label such as “I am bad at planning.”\n\nKeep what helped and adjust one thing that got in the way. Your reflection is visible to you and your assigned instructor when you choose a cohort. Do not include private details about other people.",
+        "question": "What makes a reflection useful?",
+        "options": [
+          "A harsh label about your personality",
+          "A specific observation and one next adjustment",
+          "A list of achievements you did not verify"
+        ],
+        "answer": 1,
+        "position": 4
+      }
+    ]
+  },
+  {
+    "slug": "cold-email-fundamentals",
+    "title": "Cold email fundamentals",
+    "summary": "Craft outreach messages that open thoughtful professional conversations.",
+    "position": 2,
+    "lessons": [
+      {
+        "slug": "cold-email-fundamentals-1",
+        "title": "Find a meaningful connection",
+        "objective": "Identify a specific piece of someone’s public work.",
+        "body": "Before writing, read a public project write-up, article, or talk the person has shared. Note something you genuinely noticed and how it connects to your own work or learning.\n\nA specific connection gives your message a reason to exist. Avoid copying generic compliments into a template. Do not collect private contact information or imply a relationship you do not have.",
+        "question": "What is the strongest starting point?",
+        "options": [
+          "A copied compliment",
+          "A specific project connected to your own interests",
+          "The same message sent to everyone"
+        ],
+        "answer": 1,
+        "position": 1
+      },
+      {
+        "slug": "cold-email-fundamentals-2",
+        "title": "Make a specific ask",
+        "objective": "Write one question a busy person can reasonably answer.",
+        "body": "A useful first ask is small, clear, and respectful. Instead of asking someone to explain everything about getting a job, ask about one decision in a project they have described publicly.\n\nMake it easy to decline or not reply. A first conversation can be valuable even when it does not lead to a role.",
+        "question": "Which request is clearest?",
+        "options": [
+          "Tell me everything about your career",
+          "How did you choose which user journeys to test first?",
+          "Do you have any opportunity at all?"
+        ],
+        "answer": 1,
+        "position": 2
+      },
+      {
+        "slug": "cold-email-fundamentals-3",
+        "title": "Research before you reach out",
+        "objective": "Connect a researched observation to your first question.",
+        "body": "Read a project, identify one decision that interests you, and describe the connection in your own words. For example, a write-up about accessible booking forms might connect to a student project you are building.\n\nThen make one focused ask: what did they learn, what did they test first, or what changed their approach? Keep the message concise and avoid sharing sensitive personal information.",
+        "question": "Which opening gives the clearest reason to respond?",
+        "options": [
+          "I need any job. Can you help?",
+          "I read your accessibility case study. How did you choose the first journeys to test?",
+          "You are amazing. Please hire me."
+        ],
+        "answer": 1,
+        "position": 3
+      },
+      {
+        "slug": "cold-email-fundamentals-4",
+        "title": "Follow up thoughtfully",
+        "objective": "Plan a respectful follow-up without pressure.",
+        "body": "A follow-up should add context and respect the person’s time. Refer briefly to your original question and give them an easy way to decline. Avoid repeatedly sending the same message or using guilt to demand a reply.\n\nKeep a simple outreach record of the professional context, date, and next action. Do not store private information you do not need. After a reasonable follow-up, move on to another useful action.",
+        "question": "What is a respectful follow-up?",
+        "options": [
+          "Daily reminders until they answer",
+          "A concise contextual reminder that leaves room to decline",
+          "A message suggesting they owe you a response"
+        ],
+        "answer": 1,
+        "position": 4
+      }
+    ]
+  },
+  {
+    "slug": "resume-portfolio-proof",
+    "title": "Resume & portfolio proof",
+    "summary": "Translate projects into clear evidence of what you can do.",
+    "position": 3,
+    "lessons": [
+      {
+        "slug": "resume-portfolio-proof-1",
+        "title": "Name the problem",
+        "objective": "Explain who needed what and why the project mattered.",
+        "body": "A project story starts with a concrete problem, not a list of technologies. Describe the person or process that needed help and what you set out to improve.\n\nKeep claims proportional to your evidence. A student project can be valuable without pretending it was used by thousands of customers.",
+        "question": "Which opening is most informative?",
+        "options": [
+          "I used many modern frameworks",
+          "I built a booking form so a student group could collect event requests consistently",
+          "My project changed the entire industry"
+        ],
+        "answer": 1,
+        "position": 1
+      },
+      {
+        "slug": "resume-portfolio-proof-2",
+        "title": "Show your contribution",
+        "objective": "Distinguish your own decisions from the team’s work.",
+        "body": "In a group project, name the part you owned and how you collaborated. Explain one decision you made, the alternatives you considered, and why you chose your approach.\n\nGive credit accurately. A clear, modest description of real contribution is stronger than taking credit for the whole team.",
+        "question": "How should you describe a team project?",
+        "options": [
+          "Claim every part as your own",
+          "Name your contribution and explain how you worked with others",
+          "Avoid mentioning any contribution"
+        ],
+        "answer": 1,
+        "position": 2
+      },
+      {
+        "slug": "resume-portfolio-proof-3",
+        "title": "Make a readable resume",
+        "objective": "Help a reader find relevant evidence quickly.",
+        "body": "Use clear headings and concrete examples. Match relevant skills to work you can explain. Prefer a short description of a problem, action, and observed result over a long list of unsubstantiated adjectives.\n\nCheck spelling, dates, contact details, and links. Do not add skills, employment, or qualifications you cannot support.",
+        "question": "What strengthens a resume statement?",
+        "options": [
+          "Unsupported superlatives",
+          "A specific contribution you can explain and demonstrate",
+          "An inflated job title"
+        ],
+        "answer": 1,
+        "position": 3
+      },
+      {
+        "slug": "resume-portfolio-proof-4",
+        "title": "Publish a proof portfolio",
+        "objective": "Choose work samples that tell a coherent story.",
+        "body": "Select a small set of work samples that show how you think and what you can do. Explain the context, your contribution, a decision, and what you learned.\n\nAsk permission before sharing client or team material. Remove private data and test links from a signed-out browser so reviewers can access what you intend to share.",
+        "question": "Before sharing a work sample, what should you check?",
+        "options": [
+          "Only whether the colours look good",
+          "Permissions, private data, and whether the link works for a reviewer",
+          "Whether you can claim a larger audience"
+        ],
+        "answer": 1,
+        "position": 4
+      }
+    ]
+  },
+  {
+    "slug": "networking-relationships",
+    "title": "Networking & relationships",
+    "summary": "Build professional connections with curiosity and care.",
+    "position": 4,
+    "lessons": [
+      {
+        "slug": "networking-relationships-1",
+        "title": "Map a learning network",
+        "objective": "Identify people and communities connected to your interests.",
+        "body": "A network is a set of relationships, not a list of people who owe you help. Start with classmates, teachers, professional communities, and people whose work you have learned from.\n\nWrite down the professional context and a small reason to connect. Avoid collecting private information or approaching everyone with the same transactional request.",
+        "question": "What is a useful networking goal?",
+        "options": [
+          "Collect the most contacts possible",
+          "Start a few relevant, respectful conversations",
+          "Ask every contact for an immediate favour"
+        ],
+        "answer": 1,
+        "position": 1
+      },
+      {
+        "slug": "networking-relationships-2",
+        "title": "Prepare for a conversation",
+        "objective": "Bring curiosity and a focused question.",
+        "body": "Before a conversation, learn enough about the person’s work to ask something meaningful. Prepare a brief introduction that explains your interest without turning the conversation into a long pitch.\n\nListen carefully. If you do not understand a term, ask for clarification. You can contribute thoughtful attention even when you are early in your career.",
+        "question": "What helps a first professional conversation?",
+        "options": [
+          "A memorised ten-minute pitch",
+          "A brief introduction and a relevant question",
+          "Pretending to understand everything"
+        ],
+        "answer": 1,
+        "position": 2
+      },
+      {
+        "slug": "networking-relationships-3",
+        "title": "Follow through on commitments",
+        "objective": "Build trust through small reliable actions.",
+        "body": "If you promise to send a work sample or a resource, do it when you said you would. If you cannot, communicate clearly and propose a realistic next step.\n\nA thank-you note can name one useful insight from the conversation. Do not exaggerate the relationship or assume permission to add someone to marketing lists.",
+        "question": "What builds trust after a conversation?",
+        "options": [
+          "Making large promises",
+          "Following through on a small specific commitment",
+          "Adding the person to a mailing list without asking"
+        ],
+        "answer": 1,
+        "position": 3
+      },
+      {
+        "slug": "networking-relationships-4",
+        "title": "Maintain relationships thoughtfully",
+        "objective": "Keep contact relevant and respectful over time.",
+        "body": "A useful update might show how you applied someone’s advice or share a resource connected to a previous conversation. Keep it short and do not expect ongoing unpaid support.\n\nRespect boundaries, including a decision not to reply. Relationships grow through mutual relevance and consideration.",
+        "question": "What makes a useful update?",
+        "options": [
+          "A demand for ongoing support",
+          "A brief note on how you applied a relevant insight",
+          "An unrelated message sent to every contact"
+        ],
+        "answer": 1,
+        "position": 4
+      }
+    ]
+  },
+  {
+    "slug": "interviewing-negotiation",
+    "title": "Interviewing & negotiation",
+    "summary": "Prepare clear examples and thoughtful offer conversations.",
+    "position": 5,
+    "lessons": [
+      {
+        "slug": "interviewing-negotiation-1",
+        "title": "Build an evidence story",
+        "objective": "Structure an example around a problem, action, and result.",
+        "body": "Choose a real project or situation. Explain the setting briefly, identify what you did, and describe what you observed or learned.\n\nIf you do not have a measured result, say so. A thoughtful account of a trade-off or mistake can show useful judgement.",
+        "question": "Which interview example is strongest?",
+        "options": [
+          "A dramatic story with invented numbers",
+          "A real contribution with an honest result and learning",
+          "A list of buzzwords"
+        ],
+        "answer": 1,
+        "position": 1
+      },
+      {
+        "slug": "interviewing-negotiation-2",
+        "title": "Practise explaining decisions",
+        "objective": "Make your reasoning visible without overloading the listener.",
+        "body": "Pick one decision from a project. Name the alternatives and the constraint that mattered most. Explain why your choice fit that setting, then describe what you would reconsider now.\n\nPractise aloud and invite a clarifying question. Good communication leaves room for a conversation.",
+        "question": "What helps explain a technical decision?",
+        "options": [
+          "Only naming the technology",
+          "Connecting the choice to constraints and alternatives",
+          "Claiming the choice was perfect"
+        ],
+        "answer": 1,
+        "position": 2
+      },
+      {
+        "slug": "interviewing-negotiation-3",
+        "title": "Ask thoughtful interview questions",
+        "objective": "Use questions to understand the role and working environment.",
+        "body": "An interview is also your chance to learn. Ask about the team’s current work, how feedback is given, and what a useful first month would look like.\n\nAvoid asking for confidential business details. Take notes on what matters to you and compare the opportunity with your learning goals.",
+        "question": "Which question gives useful role context?",
+        "options": [
+          "Can you share confidential customer data?",
+          "What would a useful first month in this role look like?",
+          "Will I become successful immediately?"
+        ],
+        "answer": 1,
+        "position": 3
+      },
+      {
+        "slug": "interviewing-negotiation-4",
+        "title": "Discuss an offer clearly",
+        "objective": "Prepare questions before making a commitment.",
+        "body": "Read the offer carefully and clarify responsibilities, supervision, compensation, hours, location, and start date. Ask for time to understand terms before agreeing.\n\nState your questions respectfully. For legal or financial terms you do not understand, seek appropriate qualified advice rather than guessing.",
+        "question": "What is a sound next step when offer terms are unclear?",
+        "options": [
+          "Agree immediately without reading",
+          "Ask for clarification and time to review before committing",
+          "Assume all internships have identical terms"
+        ],
+        "answer": 1,
+        "position": 4
+      }
+    ]
+  }
+]

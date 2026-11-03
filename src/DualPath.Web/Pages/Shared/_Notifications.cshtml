@@ -1,0 +1,2 @@
+@model DualPath.Web.Pages.IndexModel
+<form method="post" style="margin-bottom:22px"><input type="hidden" name="Command" value="read"><button class="btn outline sm">Mark all as read</button></form><section class="card">@if(Model.Notifications.Count==0){<div class="empty-state"><h3>You’re all caught up.</h3><p>Relevant programme and feedback updates will appear here.</p></div>}@foreach(var n in Model.Notifications){<a class="notification @(n.Read?"":"unread")" href="@n.Url"><div><h4>@n.Title</h4><p>@n.Body</p></div><small>@n.CreatedAt.ToString("dd MMM")</small></a>}</section>

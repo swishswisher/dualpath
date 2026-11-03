@@ -1,0 +1,36 @@
+# Local development only. Production uses a managed PostgreSQL service or a separately operated database.
+services:
+  database:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: dualpath
+      POSTGRES_USER: dualpath
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a local development password}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dualpath -d dualpath"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Database: Host=database;Database=dualpath;Username=dualpath;Password=${POSTGRES_PASSWORD}
+      DualPath__BaseUrl: http://localhost:8080
+      DualPath__ApplyMigrations: "true"
+      DualPath__SeedDemo: "true"
+      DualPath__DemoPassword: ${DUALPATH_DEMO_PASSWORD:?Set a development-only demo password}
+    volumes:
+      - application-data:/app/App_Data
+    depends_on:
+      database:
+        condition: service_healthy
+volumes:
+  postgres:
+  application-data:

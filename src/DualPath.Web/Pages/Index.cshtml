@@ -1,0 +1,39 @@
+@page "/{section?}/{item?}"
+@model IndexModel
+@if(Model.Flash!=null){<div class="@(Model.Public?"wrap":"")"><div class="notice" role="status">@Model.Flash</div></div>}
+@if(Model.Failure!=null){<div class="@(Model.Public?"wrap":"")"><div class="notice error" role="alert"><div><strong>We couldn’t complete that step.</strong><p>@Model.Failure</p><a class="text-link" href="/dashboard">Your workspace →</a></div></div></div>}
+@if(Model.Failure==null || HttpContext.Request.Method=="POST"){
+@if(!Model.Public){<div class="app-title"><div><div class="eyebrow">Your next chapter, by design</div><h1>@Model.Title</h1><p>@(Model.Section=="dashboard"?"A clear next step, and room to make it your own.":"Your work, your progress, and the people supporting it.")</p></div></div>}
+@switch(Model.Section){
+case "home":<partial name="_Home" model="Model"/> break;
+case "programmes":<partial name="_Programmes" model="Model"/> break;
+case "programme":<partial name="_Programme" model="Model"/> break;
+case "schools":<partial name="_Schools" model="Model"/> break;
+case "about":<partial name="_About" model="Model"/> break;
+case "resources":case "article":<partial name="_Resources" model="Model"/> break;
+case "pricing":<partial name="_Pricing" model="Model"/> break;
+case "contact":<partial name="_Contact" model="Model"/> break;
+case "signin":case "signup":case "reset":case "reset-password":case "confirm":<partial name="_Auth" model="Model"/> break;
+case "privacy":case "terms":<partial name="_Policies" model="Model"/> break;
+case "dashboard":<partial name="_Dashboard" model="Model"/> break;
+case "learning":case "courses":<partial name="_Learning" model="Model"/> break;
+case "lesson":case "assessment":<partial name="_Lesson" model="Model"/> break;
+case "assignment":case "work":<partial name="_Assignment" model="Model"/> break;
+case "feedback":<partial name="_Feedback" model="Model"/> break;
+case "reflections":<partial name="_Reflections" model="Model"/> break;
+case "practice":<partial name="_Practice" model="Model"/> break;
+case "progress":<partial name="_Progress" model="Model"/> break;
+case "notifications":<partial name="_Notifications" model="Model"/> break;
+case "account":<partial name="_Account" model="Model"/> break;
+case "billing":case "checkout":case "orgbilling":<partial name="_Billing" model="Model"/> break;
+case "cohorts":case "cohort":<partial name="_Cohorts" model="Model"/> break;
+case "instructor":case "reviews":case "review":<partial name="_Reviews" model="Model"/> break;
+case "author":<partial name="_Author" model="Model"/> break;
+case "organisation":case "members":<partial name="_Organisation" model="Model"/> break;
+case "reports":<partial name="_Reports" model="Model"/> break;
+case "support":<partial name="_Support" model="Model"/> break;
+case "admin":case "content":case "audit":case "mailbox":<partial name="_Administration" model="Model"/> break;
+case "onboarding":case "accept":<partial name="_Onboarding" model="Model"/> break;
+default:<div class="empty-state"><h2>A little help is available.</h2><p>This step isn’t available right now. Your saved work is safe.</p><a class="btn" href="/support">Get help</a></div> break;
+}
+}
